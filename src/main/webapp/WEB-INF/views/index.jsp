@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="container">
+    <div><a href="<c:url value='/create'/>">Добавить инцидент</a></div>
     <div>
         <p>Правонарушения:</p>
         <table class="table">
