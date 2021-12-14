@@ -4,12 +4,14 @@ import org.springframework.stereotype.Service;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.repository.AccidentMem;
 
-import java.util.HashMap;
+import java.util.Collection;
 
 @Service
 public class AccidentService {
-    public HashMap<Integer, Accident> findAllAccidents() {
-        AccidentMem mem = new AccidentMem();
+
+    private AccidentMem mem = new AccidentMem();
+
+    public Collection<Accident> findAllAccidents() {
         return mem.getAccidents();
     }
 }
