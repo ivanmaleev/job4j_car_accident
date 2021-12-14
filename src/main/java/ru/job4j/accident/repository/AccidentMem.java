@@ -5,6 +5,7 @@ import ru.job4j.accident.model.Accident;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 
 @Repository
 public class AccidentMem {
@@ -16,16 +17,20 @@ public class AccidentMem {
         Accident ac1 = new Accident(0, "ДТП", "Нарушение 1", "пр.Мира, 3");
         Accident ac2 = new Accident(0, "ДТП2", "Нарушение 2", "ул.К.Маркса, 32");
         Accident ac3 = new Accident(0, "ДТП3", "Нарушение 2", "пр.Иванова, 6");
-        create(ac1);
-        create(ac2);
-        create(ac3);
+        save(ac1);
+        save(ac2);
+        save(ac3);
     }
 
     public Collection<Accident> getAccidents() {
         return accidents.values();
     }
 
-    public void create(Accident accident) {
+    public Accident findById(int id) {
+        return accidents.get(id);
+    }
+
+    public void save(Accident accident) {
         if (accident.getId() == 0) {
             accident.setId(id++);
         }

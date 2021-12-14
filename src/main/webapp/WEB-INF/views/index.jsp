@@ -25,7 +25,8 @@
             <c:forEach var="accident" items="${accidents}">
                 <tr>
                     <th scope="row"><c:out value="${accident.id}"/></th>
-                    <td><c:out value="${accident.name}"/></td>
+                    <td><span><c:out value="${accident.name}"/></span>
+                        <span><a href="<c:url value='/update?id=${accident.id}'/>">Изменить инцидент</a></span></td>
                     <td><c:out value="${accident.text}"/></td>
                     <td><c:out value="${accident.address}"/></td>
                 </tr>
