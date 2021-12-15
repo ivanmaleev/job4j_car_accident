@@ -19,6 +19,7 @@
                 <th scope="col">Имя</th>
                 <th scope="col">Описание</th>
                 <th scope="col">Адрес</th>
+                <th scope="col">Тип инцидента</th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@
                         <span><a href="<c:url value='/update?id=${accident.id}'/>">Изменить инцидент</a></span></td>
                     <td><c:out value="${accident.text}"/></td>
                     <td><c:out value="${accident.address}"/></td>
+                    <td><c:out value="${accident.type.name}"/></td>
                 </tr>
             </c:forEach>
             </tbody>
