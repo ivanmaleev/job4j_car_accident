@@ -3,9 +3,11 @@ package ru.job4j.accident.repository;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
+import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
@@ -13,8 +15,12 @@ public class AccidentMem {
     private HashMap<Integer, Accident> accidents;
     private AtomicInteger id = new AtomicInteger(0);
     private HashMap<Integer, AccidentType> accidentTypes;
+    private Set<Rule> rules;
 
     public AccidentMem() {
+        rules = Set.of(Rule.of(1, "Статья. 1"),
+                Rule.of(2, "Статья. 2"),
+                Rule.of(3, "Статья. 3"));
         accidentTypes = new HashMap<>();
         accidentTypes.put(1, AccidentType.of(1, "Две машины"));
         accidentTypes.put(2, AccidentType.of(2, "Машина и человек"));
@@ -22,10 +28,15 @@ public class AccidentMem {
         accidents = new HashMap<>();
         Accident ac1 = new Accident(0, "ДТП", "Нарушение 1",
                 "пр.Мира, 3", accidentTypes.get(1));
+        ac1.addRule(findRuleById(1));
+        ac1.addRule(findRuleById(2));
         Accident ac2 = new Accident(0, "ДТП2", "Нарушение 2",
                 "ул.К.Маркса, 32", accidentTypes.get(2));
+        ac2.addRule(findRuleById(3));
+        ac2.addRule(findRuleById(2));
         Accident ac3 = new Accident(0, "ДТП3", "Нарушение 2",
                 "пр.Иванова, 6", accidentTypes.get(3));
+        ac3.addRule(findRuleById(3));
         save(ac1);
         save(ac2);
         save(ac3);
@@ -51,5 +62,14 @@ public class AccidentMem {
 
     public AccidentType findAccidentTypeById(int id) {
         return accidentTypes.get(id);
+    }
+
+    public Rule findRuleById(int id) {
+        for (Rule rule : rules) {
+            if (rule.getId() == id) {
+                return rule;
+            }
+        }
+        return null;
     }
 }
