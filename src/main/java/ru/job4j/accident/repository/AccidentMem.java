@@ -49,7 +49,7 @@ public class AccidentMem {
         accidents.put(accident.getId(), accident);
     }
 
-    private AccidentType findAccidentTypeById(int id) {
+    public AccidentType findAccidentTypeById(int id) {
         return accidentTypes.get(id);
     }
 }

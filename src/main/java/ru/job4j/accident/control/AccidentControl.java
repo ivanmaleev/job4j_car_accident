@@ -24,9 +24,9 @@ public class AccidentControl {
     @GetMapping("/create")
     public String create(Model model) {
         List<AccidentType> types = new ArrayList<>();
-        types.add(AccidentType.of(1, "Две машины"));
-        types.add(AccidentType.of(2, "Машина и человек"));
-        types.add(AccidentType.of(3, "Машина и велосипед"));
+        types.add(accidents.findAccidentTypeById(1));
+        types.add(accidents.findAccidentTypeById(2));
+        types.add(accidents.findAccidentTypeById(3));
         model.addAttribute("types", types);
         return "accident/create";
     }
