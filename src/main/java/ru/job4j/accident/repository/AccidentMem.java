@@ -7,20 +7,22 @@ import ru.job4j.accident.model.Rule;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class AccidentMem {
-    private HashMap<Integer, Accident> accidents;
     private AtomicInteger id = new AtomicInteger(0);
-    private HashMap<Integer, AccidentType> accidentTypes;
-    private Set<Rule> rules;
+    private Map<Integer, Accident> accidents;
+    private Map<Integer, AccidentType> accidentTypes;
+    private Map<Integer, Rule> rules;
 
     public AccidentMem() {
-        rules = Set.of(Rule.of(1, "Статья. 1"),
-                Rule.of(2, "Статья. 2"),
-                Rule.of(3, "Статья. 3"));
+        rules = new HashMap<>();
+        rules.put(1, Rule.of(1, "Статья. 1"));
+        rules.put(2, Rule.of(2, "Статья. 2"));
+        rules.put(3, Rule.of(3, "Статья. 3"));
         accidentTypes = new HashMap<>();
         accidentTypes.put(1, AccidentType.of(1, "Две машины"));
         accidentTypes.put(2, AccidentType.of(2, "Машина и человек"));
@@ -64,12 +66,15 @@ public class AccidentMem {
         return accidentTypes.get(id);
     }
 
+    public Collection<AccidentType> getAccidentTypes() {
+        return accidentTypes.values();
+    }
+
+    public Collection<Rule> getRules() {
+        return rules.values();
+    }
+
     public Rule findRuleById(int id) {
-        for (Rule rule : rules) {
-            if (rule.getId() == id) {
-                return rule;
-            }
-        }
-        return null;
+        return rules.get(id);
     }
 }

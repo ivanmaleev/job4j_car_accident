@@ -17,6 +17,22 @@
             <td><input type='text' name='address' value="${accident.address}"></td>
         </tr>
         <tr>
+            <td>Тип:</td>
+            <td>
+                <select name="type.id">
+                    <c:forEach var="type" items="${types}">
+                        <c:choose>
+                            <c:when test="${type.id == typeid}">
+                                <option value="${type.id}" selected>${type.name}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${type.id}">${type.name}</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </select>
+        </tr>
+        <tr>
             <td colspan='2'><input name="submit" type="submit" value="Сохранить"/></td>
         </tr>
     </table>
