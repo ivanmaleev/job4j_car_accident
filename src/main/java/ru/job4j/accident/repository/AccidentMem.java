@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+/*@Repository*/
 public class AccidentMem {
     private AtomicInteger id = new AtomicInteger(0);
     private Map<Integer, Accident> accidents;
