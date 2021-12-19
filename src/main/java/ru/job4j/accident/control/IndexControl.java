@@ -9,6 +9,7 @@ import ru.job4j.accident.repository.AccidentJdbcTemplate;
 import ru.job4j.accident.repository.AccidentRepository;
 import ru.job4j.accident.service.AccidentService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class IndexControl {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
         List<Accident> res = new ArrayList<>();
         accidentService.findAllAccidents().forEach(res::add);
         model.addAttribute("accidents", res);
