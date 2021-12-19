@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-@Repository
+/*@Repository*/
 public class AccidentHibernate {
     private final SessionFactory sf;
 
@@ -59,7 +59,7 @@ public class AccidentHibernate {
         });
     }
 
-    public List<Accident> getAccidents() {
+    public List<Accident> findAll() {
         return query(session -> session.createQuery(
                 "from Accident ac "
                         + " fetch all properties")

@@ -44,7 +44,7 @@ public class AccidentMem {
         save(ac3);
     }
 
-    public Collection<Accident> getAccidents() {
+    public Collection<Accident> findAll() {
         return accidents.values();
     }
 

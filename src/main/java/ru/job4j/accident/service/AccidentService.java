@@ -5,20 +5,21 @@ import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
 import ru.job4j.accident.repository.AccidentHibernate;
+import ru.job4j.accident.repository.AccidentJdbcTemplate;
 
 import java.util.Collection;
 
 @Service
 public class AccidentService {
 
-    private AccidentHibernate mem;
+    private AccidentJdbcTemplate mem;
 
-    public AccidentService(AccidentHibernate mem) {
+    public AccidentService(AccidentJdbcTemplate mem) {
         this.mem = mem;
     }
 
     public Collection<Accident> findAllAccidents() {
-        return mem.getAccidents();
+        return mem.findAll();
     }
 
     public Collection<AccidentType> getAccidentTypes() {
