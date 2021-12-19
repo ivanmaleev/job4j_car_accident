@@ -4,6 +4,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
@@ -19,6 +20,7 @@ public class AccidentJdbcTemplate {
         this.jdbc = jdbc;
     }
 
+    @Transactional
     public Accident save(Accident accident) {
 
         GeneratedKeyHolder holder = new GeneratedKeyHolder();

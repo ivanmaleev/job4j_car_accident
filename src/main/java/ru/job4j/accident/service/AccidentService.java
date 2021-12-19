@@ -43,7 +43,9 @@ public class AccidentService {
 
     public void save(Accident accident, String[] ids) {
         for (String id : ids) {
-            accident.addRule(ruleMem.findById(Integer.parseInt(id)).orElse(null));
+            Rule rule = new Rule();
+            rule.setId(Integer.parseInt(id));
+            accident.addRule(rule);
         }
         mem.save(accident);
     }
