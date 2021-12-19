@@ -10,6 +10,7 @@ import ru.job4j.accident.repository.AccidentRepository;
 import ru.job4j.accident.service.AccidentService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,10 +23,11 @@ public class IndexControl {
     }
 
     @GetMapping("/")
-    public String index(Model model, HttpServletRequest request) {
+    public String index(Model model, Principal principal) {
         List<Accident> res = new ArrayList<>();
         accidentService.findAllAccidents().forEach(res::add);
         model.addAttribute("accidents", res);
+        model.addAttribute("username", principal.getName());
         return "index";
     }
 }
