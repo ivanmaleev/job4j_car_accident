@@ -5,6 +5,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
@@ -13,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-/*@Repository*/
+@Repository
 public class AccidentHibernate {
     private final SessionFactory sf;
 
@@ -36,6 +37,7 @@ public class AccidentHibernate {
         }
     }
 
+    @Transactional
     public Accident save(Accident accident) {
         if (accident.getId() == 0) {
             createAccident(accident);
@@ -82,7 +84,8 @@ public class AccidentHibernate {
         return query(session -> {
             Query<Accident> query = session.createQuery(
                     "from Accident ac "
-                            + "fetch all properties "
+                            + "join fetch ac.type "
+                            + "join fetch ac.rules "
                             + "where ac.id = : id");
             query.setParameter("id", id);
             return query.uniqueResult();

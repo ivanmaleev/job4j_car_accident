@@ -12,9 +12,9 @@ import java.util.Collection;
 @Service
 public class AccidentService {
 
-    private AccidentJdbcTemplate mem;
+    private AccidentHibernate mem;
 
-    public AccidentService(AccidentJdbcTemplate mem) {
+    public AccidentService(AccidentHibernate mem) {
         this.mem = mem;
     }
 
