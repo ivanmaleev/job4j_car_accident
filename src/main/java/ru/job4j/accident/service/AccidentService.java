@@ -1,21 +1,27 @@
 package ru.job4j.accident.service;
 
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.job4j.accident.model.Accident;
 import ru.job4j.accident.model.AccidentType;
 import ru.job4j.accident.model.Rule;
-import ru.job4j.accident.repository.AccidentHibernate;
-import ru.job4j.accident.repository.AccidentJdbcTemplate;
+import ru.job4j.accident.repository.*;
 
 import java.util.Collection;
 
 @Service
 public class AccidentService {
 
-    private AccidentHibernate mem;
+    private AccidentRepository mem;
+    private AccidentTypeRepository typeMem;
+    private RuleRepository ruleMem;
 
-    public AccidentService(AccidentHibernate mem) {
+    public AccidentService(AccidentRepository mem, AccidentTypeRepository typeMem,
+                           RuleRepository ruleMem) {
         this.mem = mem;
+        this.typeMem = typeMem;
+        this.ruleMem = ruleMem;
     }
 
     public Collection<Accident> findAllAccidents() {
@@ -23,20 +29,21 @@ public class AccidentService {
     }
 
     public Collection<AccidentType> getAccidentTypes() {
-        return mem.getAccidentTypes();
+        return typeMem.findAll();
     }
 
     public Collection<Rule> getRules() {
-        return mem.getRules();
+        return ruleMem.findAll();
     }
 
     public Accident findById(int id) {
-        return mem.findById(id);
+        Accident accident = mem.findById(id).orElse(null);
+        return accident;
     }
 
     public void save(Accident accident, String[] ids) {
         for (String id : ids) {
-            accident.addRule(mem.findRuleById(Integer.parseInt(id)));
+            accident.addRule(ruleMem.findById(Integer.parseInt(id)).orElse(null));
         }
         mem.save(accident);
     }

@@ -14,7 +14,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 
-@Repository
+/*@Repository*/
 public class AccidentHibernate {
     private final SessionFactory sf;
 
