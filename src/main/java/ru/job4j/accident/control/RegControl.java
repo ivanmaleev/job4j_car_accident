@@ -10,8 +10,6 @@ import ru.job4j.accident.model.User;
 import ru.job4j.accident.repository.AuthorityRepository;
 import ru.job4j.accident.repository.UserRepository;
 
-import java.util.List;
-
 @Controller
 public class RegControl {
 
@@ -28,8 +26,8 @@ public class RegControl {
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user, Model model) {
-        List<User> byUsername = users.findByUsername(user.getUsername());
-        if (byUsername.size() > 0) {
+        User userInDB = users.findByUsername(user.getUsername());
+        if (userInDB != null) {
             model.addAttribute("errorMessage", "Username is busy");
             return "reg";
         }
