@@ -1,5 +1,6 @@
 package ru.job4j.accident.control;
 
+import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +12,12 @@ import ru.job4j.accident.repository.AuthorityRepository;
 import ru.job4j.accident.repository.UserRepository;
 
 @Controller
+@AllArgsConstructor
 public class RegControl {
 
     private final PasswordEncoder encoder;
     private final UserRepository users;
     private final AuthorityRepository authorities;
-
-    public RegControl(PasswordEncoder encoder, UserRepository users,
-                      AuthorityRepository authorities) {
-        this.encoder = encoder;
-        this.users = users;
-        this.authorities = authorities;
-    }
 
     @PostMapping("/reg")
     public String regSave(@ModelAttribute User user, Model model) {
